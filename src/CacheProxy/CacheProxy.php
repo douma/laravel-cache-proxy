@@ -37,7 +37,7 @@ class {className} {implementsOrExtends}
 
     private function call(string $name, array $arguments)
     {
-        $hash = sha1(__CLASS__) . $name . print_r($arguments, true);
+        $hash = sha1(__CLASS__) . $name . print_r($arguments, true) . print_r($this->constructor, true);
         if(cache()->has($hash)) {
             return unserialize(cache()->get($hash));
         }
