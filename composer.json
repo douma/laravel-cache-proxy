@@ -1,0 +1,24 @@
+{
+    "name": "douma/laravel-cache-proxy",
+    "type": "library",
+    "description": "Laravel cache proxy",
+    "keywords": ["cache", "laravel"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Stefan Douma",
+            "email": "douma4@gmail.com",
+            "homepage": "https://github.com/douma"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Douma\\CacheProxy\\": "src/CacheProxy/"
+        }
+    },
+    "require": {
+        "php": "^7.3"
+    },
+    "require-dev": {
+    }
+}
