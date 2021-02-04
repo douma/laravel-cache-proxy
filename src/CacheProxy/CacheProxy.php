@@ -42,7 +42,7 @@ class {className} {implementsOrExtends}
             return unserialize(cache()->get($hash));
         }
         if(!$this->subject) {
-            $this->subject = app()->make({classWithNameSpace}, $this->constructor);
+            $this->subject = new \App\Repositories\MyRepository(...$this->constructor);
         }
         $result = $this->subject->{$name}(...$arguments);
         if($result) {
