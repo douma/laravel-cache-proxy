@@ -1,5 +1,15 @@
 # Laravel Cache Proxy
 
+## Installation 
+
+`composer require douma/laravel-cache-proxy`
+
+Register the following service provider:
+
+```
+Douma\CacheProxy\ServiceProvider::class
+```
+
 ## Command–query separation
 
 In order to use this library your methods must follow `Command Query Separation`, since
