@@ -23,34 +23,34 @@ class CacheProxy
     {
         return $stub = '<?php namespace {namespace};
 
-            class {className} {implementsOrExtends}
-            {
-                private $subject;
-                private $constructor = [];
+class {className} {implementsOrExtends}
+{
+    private $subject;
+    private $constructor = [];
 
-                public function __construct()
-                {
-                    $this->constructor = func_get_args();
-                }
+    public function __construct()
+    {
+        $this->constructor = func_get_args();
+    }
 
-                private function call(string $name, array $arguments)
-                {
-                    $hash = sha1(__CLASS__) . $name . print_r($arguments, true);
-                    if(cache()->has($hash)) {
-                        return unserialize(cache()->get($hash));
-                    }
-                    if(!$this->subject) {
-                        $this->subject = app()->make({classWithNameSpace}, $this->constructor);
-                    }
-                    $result = $this->subject->{$name}(...$arguments);
-                    if($result) {
-                        cache()->put($hash, serialize($result));
-                        return $result;
-                    }
-                }
+    private function call(string $name, array $arguments)
+    {
+        $hash = sha1(__CLASS__) . $name . print_r($arguments, true);
+        if(cache()->has($hash)) {
+            return unserialize(cache()->get($hash));
+        }
+        if(!$this->subject) {
+            $this->subject = app()->make({classWithNameSpace}, $this->constructor);
+        }
+        $result = $this->subject->{$name}(...$arguments);
+        if($result) {
+            cache()->put($hash, serialize($result));
+            return $result;
+        }
+    }
 
-                {methods}
-            }';
+    {methods}
+}';
     }
 
     public static function replaceStub($class) : string
