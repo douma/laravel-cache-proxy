@@ -42,7 +42,7 @@ class {className} {implementsOrExtends}
             return unserialize(cache()->get($hash));
         }
         if(!$this->subject) {
-            $this->subject = new \App\Repositories\MyRepository(...$this->constructor);
+            $this->subject = new {classWithNameSpace}(...$this->constructor);
         }
         $result = $this->subject->{$name}(...$arguments);
         if($result) {
@@ -64,8 +64,7 @@ class {className} {implementsOrExtends}
         $interfaces = $reflection->getInterfaces();
 
         $className = $reflection->getShortName();
-        $fullClass = "\\" . $reflection->getName() . "::class";
-        $fullClassWithoutClass = "\\" . $reflection->getName();
+        $fullClass = "\\" . $reflection->getName();
         $implementsOrExtends = "";
         $namespace = "Cache\\" . $reflection->getNamespaceName();
         if($parentClass) {
@@ -150,7 +149,7 @@ class {className} {implementsOrExtends}
                 } elseif(!$method->hasReturnType()) {
                     $methodsReplace .= " return ";
                 }
-                $methodsReplace .= $fullClassWithoutClass.'::' . $method->getShortName() . '(...func_get_args());';
+                $methodsReplace .= $fullClass.'::' . $method->getShortName() . '(...func_get_args());';
                 $methodsReplace .= "\t}" . PHP_EOL;
             }
         }

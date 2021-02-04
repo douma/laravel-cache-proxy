@@ -15,16 +15,6 @@ Douma\CacheProxy\ServiceProvider::class
 In order to use this library your methods must follow `Command Query Separation`, since
 query methods are cached by the Proxy layer. 
 
-## Example Illuminate\Http\Request
-
-If you wish to cache the `Illuminate\Http\Request` object, add a `Cache`-prefix.
-(Do not use this example in production!)
-
-~~~php 
-$request = new \Cache\Illuminate\Http\Request();
-dd($request->get('a'));
-~~~
-
 ## Example
 
 If you have a `Repository`-object which needs to be cached:
