@@ -13,7 +13,9 @@ class CacheProxy
                 $reflection = new \ReflectionClass($original);
                 $fileName = $reflection->getFileName();
                 $file = storage_path('framework/cache') . "/" . sha1($original) . "-" . sha1_file($fileName) . ".php";
-                \Illuminate\Support\Facades\File::put($file, self::replaceStub($original));
+                if(!\Illuminate\Support\Facades\File::exists($file)) {
+                    \Illuminate\Support\Facades\File::put($file, self::replaceStub($original));
+                }
                 require_once $file;
             }
         });
