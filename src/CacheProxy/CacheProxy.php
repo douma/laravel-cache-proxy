@@ -6,14 +6,14 @@ class CacheProxy
 {
     public static function register() : void
     {
-        spl_autoload_register(function($class) use($stub)
+        spl_autoload_register(function($class)
         {
             if(strpos($class, 'Cache') === 0) {
                 $original = str_replace("Cache\\", "", $class);
-                $reflection = new ReflectionClass($original);
+                $reflection = new \ReflectionClass($original);
                 $fileName = $reflection->getFileName();
                 $file = storage_path('framework/cache') . "/" . sha1($original) . "-" . sha1_file($fileName) . ".php";
-                \Illuminate\Support\Facades\File::put($file, replaceStub($stub, $original));
+                \Illuminate\Support\Facades\File::put($file, self::replaceStub($original));
                 require_once $file;
             }
         });
